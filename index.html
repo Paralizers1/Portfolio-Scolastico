@@ -105,8 +105,8 @@ background-size: 50px 50px, 50px 50px, 25px 25px, 25px 25px;text-align:center;pa
 
 .title{display:inline-block;margin:0 auto;padding:5px 2rem;border: 2px dashed #39bdb4;border-radius: 8px;font-family: "Kavoon", serif;  font-weight: 400;  font-style: normal;font-size:18pt;text-shadow: 1px 0 rgba(255,255,255,0.8), -1px 0 rgba(255,255,255,0.8), 0 1px rgba(255,255,255,0.8), 0 -1px rgba(255,255,255,0.8), 1px 1px rgba(255,255,255,0.8), -1px -1px rgba(255,255,255,0.8), 1px -1px rgba(255,255,255,0.8), -1px 1px rgba(255,255,255,0.8),0 1px 4px rgba(255,255,255,0.8);}
 
-.info{text-align:center;padding:25px;}
-.info .title{margin:12px;margin-top:2px;}
+.info,.lavori{text-align:center;padding:25px;}
+.info .title,.lavori .title{margin:12px;margin-top:2px;}
 .info .desc{max-width: 730px;border: 2px solid #39bdb4;padding:3px;margin:0 auto;border-radius:8px;}
 .info .desc .content{ 
   margin: 0 auto;
@@ -132,6 +132,8 @@ background-size: 50px 50px, 50px 50px, 25px 25px, 25px 25px;text-align:center;pa
   .info .desc .content:hover {
   box-shadow: 0 6px 14px rgba(0,0,0,0.3), inset 0 0 8px rgba(255,255,255,0.7), inset 0 0 9px rgba(0,0,0,0.4);
 }
+.info.explav .content{height:165px;}
+.info.explav{padding-top:0;}
   .info .desc p{margin-bottom:5pt}
   .info .desc p:last-child{margin-bottom:0;}
   .info .desc .content .text {    height: 90%;
@@ -147,7 +149,19 @@ background-size: 50px 50px, 50px 50px, 25px 25px, 25px 25px;text-align:center;pa
 @media screen and (max-width: 510px) {
   .contain_header{font-size:25pt;}
   .contain_header > div:not(.avatar){min-width:100px;}
+  .lavori ol li{width:100%;}
 }
+body.pdf .info .desc,body.pdf .info .content{max-width:unset;height:unset;}
+body.pdf .info .desc .text{position:unset;}
+body.pdf nav{display:none;}
+body.pdf header{box-shadow: 0 2px 3px rgba(0,0,0,0.2);position:relative;}
+body.pdf .portfolio-title{font-size:0pt;}
+body.pdf .portfolio-title:before{content:"Curriculum";font-size: 30pt;}
+.lavori ol{list-style: none;margin:0;padding:0;}
+.lavori ol li{display:inline-block;margin:4px 5px;padding:5px 10px;transition:all 1s;text-align:center;background: linear-gradient(0deg,rgba(255, 255, 255, 0.2) 0%, rgba(0, 0, 0, 0.12) 100%),#daebe9;color:#FFF;box-shadow:inset 0 0 6px rgba(255,255,255,0.6),inset 0 0 3px rgba(0,0,0,0.2), 0 0 3px rgba(0,0,0,0.3);}
+.lavori ol li:hover{background:linear-gradient(0deg,rgba(0, 0, 0, 0.12) 0%,  rgba(255, 255, 255, 0.2)100%),#daebe9;color:#1e423e;box-shadow:inset 0 0 8px rgba(255,255,255,0.7),inset 0 0 12px rgba(0,0,0,0.3), 0 0 5px rgba(0,0,0,0.4)}
+.lavori ol li a {color:#345c57;text-decoration:none;}
+.lavori ol li small{display:block;}
 </style>
 
 </head>
@@ -162,15 +176,37 @@ background-size: 50px 50px, 50px 50px, 25px 25px, 25px 25px;text-align:center;pa
 <main>
 <nav>
 <a href="#"> Home </a>
-<a href="#" download> Download PDF Porfolio </a>	
+<!--<a href="#" download> Download PDF Porfolio </a>	-->
+<a href="#" onclick='document.body.classList.toggle("pdf");'> Visualizzazione PDF </a>	
 <a href="#"> Articoli </a>
 </nav>
 <section class="container">
 <div class="info">
-<div class="title">About Us</div>
+<div class="title">Qualcosa su di me</div>
 <div class="desc">
 <div class="content">
 <div class="text">
+<!--
+<p>
+<strong>Mi chiamo Simone</strong>, sono nato nel <strong>1996</strong> e sono un <strong>programmatore web autodidatta</strong> con una passione per il codice nata a 14 anni. Originario di <strong>Napoli</strong> e attualmente residente a <strong>Bologna</strong>, frequento il corso serale tecnico informatico, presso l'Istituto <strong>Aldini Valeriani</strong> alla quale mi sono iscritto proprio per entrare in un campo lavorativo dove poter sfruttare una passione che ho fin da piccolo, e la mia classe è la <em>3AIS</em>, e nel mentre lavoro come <strong>collaboratore scolastico</strong>.
+</p>
+
+<p>
+Nel tempo ho sviluppato numerosi script per <strong>ForumFree</strong>, piattaforma su cui sono anche <strong>moderatore</strong>, occupandomi di supporto tecnico e problem solving. Ho avuto inoltre alcune esperienze nella <strong>gestione di server</strong> e nello sviluppo di <strong>plugin in Java</strong> per server Minecraft. Anche se queste esperienze sono state limitate, mi hanno permesso di esplorare diversi linguaggi e tecnologie.
+</p>
+
+<p>
+Mi appassiona in particolare (e dove sono piu competente) lo <strong>sviluppo backend</strong>, dove preferisco lavorare con <strong>PHP</strong> o <strong>Node.js</strong>, ambiti in cui mi sento più a mio agio e dove cerco di crescere ogni giorno.
+</p>
+
+<p>
+Lavorare a scuola, a contatto con i ragazzi che crescono e si formano, è forse <em>uno dei lavori più belli al mondo</em>, e mi dispiace profondamente l’idea di doverlo lasciare. Tuttavia, sono giunto a un punto in cui <strong>non è più economicamente sostenibile</strong>.
+</p>
+
+<p>
+Il mio obiettivo, dopo il diploma, è <strong>rivalutare la mia vita professionale</strong> e trovare un impiego che sappia <strong>riconoscere e valorizzare</strong> il mio impegno e le mie competenze, permettendomi di lavorare in un ambito che è sempre stato <em>una delle mie passioni fin da bambino</em>, una passione che, durante l’infanzia, non ho mai potuto sviluppare davvero. Vorrei lasciare alle spalle un contesto lavorativo in cui ad oggi mi sento <strong>sottopagato</strong> <small>(All'incirca 1100 euro al mese per 36 ore settimanali e all'incirca una 60 di ore da dover dare ogni anno alla scuola per coprire dei giorni in cui è chiusa)</small> ed in piu' sembra di essere poco apprezzato e considerati della dirigenza, nonostante l’impegno e il cuore che ci metto ogni giorno.
+</p>
+-->
 <p> <strong>Mi chiamo Simone</strong>, sono nato nel <strong>1996</strong> e sono un <strong>programmatore web autodidatta</strong> con una passione per il codice nata a 14 anni. Originario di <strong>Napoli</strong> e attualmente residente a <strong>Bologna</strong>, frequento il corso serale tecnico informatico presso l'Istituto <strong>Aldini Valeriani</strong>, dove ho scelto di iscrivermi per trasformare una passione coltivata fin da ragazzo in una vera e propria professione. Attualmente lavoro come <strong>collaboratore scolastico</strong> e faccio parte della classe <em>3AIS</em>. </p>
 <p> Nel corso degli anni ho realizzato diversi script per la piattaforma <strong>ForumFree</strong>, dove ricopro anche il ruolo di <strong>moderatore</strong>, offrendo supporto tecnico e risolvendo problematiche varie. Ho inoltre maturato esperienze nella <strong>gestione di server</strong> e nello sviluppo di <strong>plugin Java</strong> per server Minecraft. Queste attività, seppur svolte in contesti non professionali, mi hanno dato la possibilità di esplorare e approfondire linguaggi e tecnologie differenti. </p>
 <p> Il mio principale interesse è lo <strong>sviluppo backend</strong>, ambito in cui mi sento particolarmente a mio agio. Prediligo lavorare con <strong>PHP</strong> o <strong>Node.js</strong>, tecnologie che utilizzo quotidianamente e su cui cerco costantemente di migliorarmi. </p>
@@ -190,6 +226,51 @@ background-size: 50px 50px, 50px 50px, 25px 25px, 25px 25px;text-align:center;pa
 <div><div>Js FE <span>80%</span></div> <div class="content_skills"><div style="--finale: 80;--colore: 	#F0DB4F;" class="cerchio-bordo"></div></div></div>
 <div><div>CSS <span>100%</span></div> <div class="content_skills"><div style="--finale: 100;--colore:	#2965F1;" class="cerchio-bordo"></div></div></div>
 <div><div>HTML <span>100%</span></div> <div class="content_skills"><div style="--finale: 100;--colore: 	#E34F26;" class="cerchio-bordo"></div></div></div>
+</div>
+</div>
+
+<div class="lavori">
+<div class="title">Alcuni Esempi Scripting</div>
+<ol>
+<li>
+<a href="https://pokemon.forumfree.it/">GDR Pokémon Semi Automatico<small>(Node Js, PHP, Bot Automatico, Inter. Utente)</small></a>
+</li>
+
+<li>
+<a href="https://ffboard.forumfree.it/?t=77432328">Backend Reazioni FF<small>(Oltre 1.5kk di reazioni nel database)</small></a>
+</li>
+
+<li>
+<a href="https://ffmagazine.forumfree.it/?t=67768972#entry559379255">Script Newsboard Plus<small>(Websocket Node Js)</small></a>
+</li>
+<li>
+<a href="https://ffboard.forumfree.it/?t=68690223">Script Reporting System<small>(130 installazioni)</small></a>
+</li>
+<li>
+<a href="http://ffmagazine.forumfree.it/?t=71474203&st=840#entry628241202">Script Update utenti 24h <small>(270 installazioni)</small></a>
+</li>
+<li>
+<a href="https://mappeconcettuali.altervista.org/">Sito mappe concettuali <small>(tool non completo)</small></a>
+</li>
+<li>
+<a href="https://paralizer.altervista.org/randomavatars/">Upload e immagine randomica<small>(mai rilasciato anno 2015 Integrazione utenti disattivata)</small></a>
+</li>
+</ol>
+<div class="title" style="margin-top:18px">Script realizzati installati su ForumFree</div>
+<img src="script.png" style="width:80%" alt="Script Installati">
+</div>
+<div class="info explav">
+<div class="title">Esperienze Lavorative</div>
+<div class="desc">
+<div class="content">
+<div class="text">
+<ol>
+<li><b>Collaboratore Scolastico: Lavoro attuale a tempo indeterminato</b></li>
+<li>Assistente cuoco presso piccole trattorie 2016/2017</li>
+<li>Cuoco per apprendimento presso friggitoria "il cuoppo" 2016</li>
+<li>Assistente avvocato 2015: Fotocopie e scansione pratiche, catalogazione pratiche e consegna/ritiro pratiche in tribunale.</li>
+</div>
+</div>
 </div>
 </div>
 </section>
