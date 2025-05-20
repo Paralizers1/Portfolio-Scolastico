@@ -353,6 +353,7 @@ footer {
 	background:#4f4f4f;
 	padding:20px;
 	color:#FFF;
+	margin-top:10px;
 }
 footer .right{float:right;}
 footer .right a{color:#FFF;font-weight:500;}
@@ -368,19 +369,22 @@ footer .right a{color:#FFF;font-weight:500;}
      .contain_header > div:not(.avatar){
         min-width:100px;
     }
-     .lavori ol li{
-        width:100%;
-    }
+    
 	
 }
  @media screen and (max-width: 700px) {
 	footer .right{
         width:100%;
     }
+	 .lavori ol li{
+        width:100%;
+    }
 	footer .right{padding-bottom:20px;text-align:center;}
 	footer > span:not(.right){display:block;text-align:center;}
 }
- 
+  
+  
+
  body.pdf .info .desc,body.pdf .info .content{
     max-width:unset;
     height:unset;
@@ -413,11 +417,13 @@ footer .right a{color:#FFF;font-weight:500;}
 <div class="contain_header"><div class="name_user">Simone</div><div class="avatar"><a href="./"><img src="img.jpg"></a></div><div class="surname_user">Sorrentino</div></div>
 <h1 class="portfolio-title">Portfolio <span>Simone Sorrentino</span></h1>
 </header>
+
 <main>
 <nav>
 <a href="#"> Home </a>
 <!--<a href="#" download> Download PDF Porfolio </a>	-->
-<a href="#" onclick='document.body.classList.toggle("pdf");'> Visualizzazione PDF </a>	
+<!--<a href="#" onclick='document.body.classList.toggle("pdf");' class="pul_vispdf"> Visualizzazione PDF </a>-->
+<a href="curriculum.pdf" download="curriculum_simone_sorrentino.pdf"> Scarica PDF </a>
 <a href="#"> Articoli </a>
 </nav>
 <section class="container">
@@ -533,6 +539,24 @@ Il mio obiettivo, dopo il diploma, è <strong>rivalutare la mia vita professiona
 </div>
 </div>
 </section>
+<!--<script>
+document.querySelector('.pul_vispdf').addEventListener('click', () => {
+    // Carica lo script di Paged.js dinamicamente
+    const script = document.createElement('script');
+    script.src = 'https://unpkg.com/pagedjs/dist/paged.js'; // versione core NON auto-eseguibile
+    script.onload = () => {
+      // Quando caricato, avvia il polyfill
+      const paged = new Paged.Previewer();
+
+		paged.preview(document.body).then(() => {
+		  console.log('Paged.js attivato');
+		  // eventualmente avvia stampa
+		  window.print();
+		});
+    };
+    document.head.appendChild(script);
+  });
+</script>-->
 <script>
 const elementi = document.querySelectorAll('.cerchio-bordo');
 const durata = 3000;
@@ -557,6 +581,7 @@ elementi.forEach(el => {
 });
 </script>
 </main>
+<div class="spacer"></div>
 <footer><span class="right">Contattami: <a href="mailto:simone96sorrentino@gmail.com">simone96sorrentino@gmail.com</a></span>
 <span>&copy; Copyright Simone Sorrentino 2025</span>
 </footer>
