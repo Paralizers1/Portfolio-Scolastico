@@ -10,9 +10,15 @@
     box-sizing:border-box;
     margin:0;
 }
+a {
+	text-decoration: none;
+}
  body{
     margin:0;
-    background:#f0f0f0
+    background:#f0f0f0;
+	font-family: "Playpen Sans", cursive;
+     font-optical-sizing: auto;
+     font-weight: 200;
 }
  .container {
     background:#f0f0f0;
@@ -258,43 +264,7 @@
      position: absolute;
      height: calc(100% - 2rem);
 }
- @keyframes espandi {
-     to {
-         background-size: 100% 100%;
-    }
-}
- @media screen and (max-width: 510px) {
-     .contain_header{
-        font-size:25pt;
-    }
-     .contain_header > div:not(.avatar){
-        min-width:100px;
-    }
-     .lavori ol li{
-        width:100%;
-    }
-}
- body.pdf .info .desc,body.pdf .info .content{
-    max-width:unset;
-    height:unset;
-}
- body.pdf .info .desc .text{
-    position:unset;
-}
- body.pdf nav,body.pdf .scripting{
-    display:none;
-}
- body.pdf header{
-    box-shadow: 0 2px 3px rgba(0,0,0,0.2);
-    position:relative;
-}
- body.pdf .portfolio-title{
-    font-size:0pt;
-}
- body.pdf .portfolio-title:before{
-    content:"Curriculum";
-    font-size: 30pt;
-}
+/* LAVORI SCRIPTING */
  .lavori ol{
     list-style: none;
     margin:0 auto;
@@ -323,6 +293,7 @@
  .lavori ol li small{
     display:block;
 }
+/*ESPERIENZE DI LAVORO E TITOLI DI STUDIO*/
  ol.timeline {
      list-style: none;
      position: relative;
@@ -378,7 +349,59 @@
  ol.timeline {
      counter-reset: item;
 }
-
+footer {
+	background:#4f4f4f;
+	padding:20px;
+	color:#FFF;
+}
+footer .right{float:right;}
+footer .right a{color:#FFF;font-weight:500;}
+ @keyframes espandi {
+     to {
+         background-size: 100% 100%;
+    }
+}
+ @media screen and (max-width: 510px) {
+     .contain_header{
+        font-size:25pt;
+    }
+     .contain_header > div:not(.avatar){
+        min-width:100px;
+    }
+     .lavori ol li{
+        width:100%;
+    }
+	
+}
+ @media screen and (max-width: 700px) {
+	footer .right{
+        width:100%;
+    }
+	footer .right{padding-bottom:20px;text-align:center;}
+	footer > span:not(.right){display:block;text-align:center;}
+}
+ 
+ body.pdf .info .desc,body.pdf .info .content{
+    max-width:unset;
+    height:unset;
+}
+ body.pdf .info .desc .text{
+    position:unset;
+}
+ body.pdf nav,body.pdf .scripting{
+    display:none;
+}
+ body.pdf header{
+    box-shadow: 0 2px 3px rgba(0,0,0,0.2);
+    position:relative;
+}
+ body.pdf .portfolio-title{
+    font-size:0pt;
+}
+ body.pdf .portfolio-title:before{
+    content:"Curriculum";
+    font-size: 30pt;
+}
 </style>
 
 </head>
@@ -495,7 +518,7 @@ Il mio obiettivo, dopo il diploma, è <strong>rivalutare la mia vita professiona
 
 
 <div class="list_item titolistudio">
-<div class="title">Titoli di studio</div>
+<div class="title">Titoli di studio e Corsi</div>
 <div class="desc">
 <div class="content">
 <div class="text">
@@ -534,7 +557,8 @@ elementi.forEach(el => {
 });
 </script>
 </main>
-<footer>&copy; Copyright Simone Sorrentino 2025
+<footer><span class="right">Contattami: <a href="mailto:simone96sorrentino@gmail.com">simone96sorrentino@gmail.com</a></span>
+<span>&copy; Copyright Simone Sorrentino 2025</span>
 </footer>
 
 </body>
