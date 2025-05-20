@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta charset="UTF-8">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Birthstone&family=Chicle&family=Kavoon&family=Playpen+Sans:wght@100..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Birthstone&family=Chicle&family=Kavoon&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Playpen+Sans:wght@100..800&display=swap');
  *{
     box-sizing:border-box;
     margin:0;
@@ -15,14 +15,14 @@ a {
 }
  body{
     margin:0;
-    background:#f0f0f0;
+    background:#f9f9f9;
 	font-family: "Playpen Sans", cursive;
      font-optical-sizing: auto;
      font-weight: 200;
 }
  .container {
-    background:#f0f0f0;
-    background: linear-gradient(0deg,rgba(255, 255, 255, 0.18) 0%, rgba(0, 0, 0, 0.15) 100%),#f0f0f0;
+    background:#f9f9f9;
+    background: linear-gradient(0deg,rgba(255, 255, 255, 0.18) 0%, rgba(0, 0, 0, 0.15) 100%),#f9f9f9;
 }
  header .avatar{
     width:100px;
@@ -213,7 +213,9 @@ a {
  .info .title,.lavori .title, .list_item .title{
     margin:12px;
     margin-top:2px;
+	
 }
+.list_item .title{margin-bottom:30px;}
  .info .desc{
     max-width: 730px;
     border: 2px solid #39bdb4;
@@ -294,7 +296,9 @@ a {
     display:block;
 }
 /*ESPERIENZE DI LAVORO E TITOLI DI STUDIO*/
- ol.timeline {
+.list_item:not(.explav)  ol.timeline{padding-bottom:16px;}
+ ol.timeline { 
+	
      list-style: none;
      position: relative;
      padding-left: 40px;
@@ -406,27 +410,111 @@ footer .right a{color:#FFF;font-weight:500;}
     content:"Curriculum";
     font-size: 30pt;
 }
-</style>
 
+ .slide {
+    overflow: hidden;
+    position: relative;
+    transition: height 0.5s ease;
+    width: 100%;
+  }
+   .slider{
+    display: flex;
+	flex-wrap: nowrap;
+    transition: transform 0.5s ease;
+    width: 200%; /* 100vw * numero di slide */
+  }
+    .slider > section  {
+	display:inline-block;
+    width: 50%;
+    flex-shrink: 0;
+  }
+   #tab1:checked ~ .slider {
+    transform: translateX(0%);
+  }
+
+  #tab2:checked ~ .slider {
+    transform: translateX(-50%);
+  }
+
+.article {text-align:center;max-width:730px;margin:0 auto;}
+.article article> *:not(.title) {text-align:left;font-family:'Open Sans', sans-serif;font-weight:500;line-height: 1.8;letter-spacing: 1pt;
+     word-spacing: 1pt;}
+.article .title{margin: 10px;}
+article > p {margin-top:10px;}
+.img_container > img{width:46%;margin:0 2%;vertical-align:middle;}
+.aligncenter{text-align:center;}
+</style>
+<script>
+function handleHashSelection() {
+  const hash = window.location.hash.substring(1); 
+  let foundMatch = false;
+
+
+  const labels = document.querySelectorAll('label[for^="tab"]');
+  
+
+  if (hash) {
+    for (const label of labels) {
+      if (label.innerText.toLowerCase().trim() === hash) {
+        const tabElement = document.getElementById(label.getAttribute('for'));
+        
+        if (tabElement) {
+          tabElement.click();
+          if (tabElement.type === 'radio' || tabElement.type === 'checkbox') {
+            tabElement.checked = true;
+          }
+          tabElement.scrollIntoView({ behavior: 'smooth' });
+          foundMatch = true;
+          break;
+        }
+      }
+    }
+  }
+
+  // Se non ha trovato corrispondenze e ci sono elementi, clicca il primo
+  if (!foundMatch && labels.length > 0) {
+    const firstTabElement = document.getElementById(labels[0].getAttribute('for'));
+    if (firstTabElement) {
+      firstTabElement.click();
+      if (firstTabElement.type === 'radio' || firstTabElement.type === 'checkbox') {
+        firstTabElement.checked = true;
+      }
+      firstTabElement.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+}
+
+
+document.addEventListener('DOMContentLoaded', handleHashSelection);
+window.addEventListener('popstate', handleHashSelection);
+</script>
 </head>
 
 <body>
 
 <header>
 
-<div class="contain_header"><div class="name_user">Simone</div><div class="avatar"><a href="./"><img src="img.jpg"></a></div><div class="surname_user">Sorrentino</div></div>
-<h1 class="portfolio-title">Portfolio <span>Simone Sorrentino</span></h1>
+<div class="contain_header"><div class="name_user">Simone</div><div class="avatar"><a href="./"><img src="./media/img.jpg"></a></div><div class="surname_user">Sorrentino</div></div>
+<a href="./"><h1 class="portfolio-title">Portfolio <span>Simone Sorrentino</span></h1></a>
 </header>
 
 <main>
 <nav>
-<a href="#"> Home </a>
+<label for="tab1"> Home </label>
 <!--<a href="#" download> Download PDF Porfolio </a>	-->
 <!--<a href="#" onclick='document.body.classList.toggle("pdf");' class="pul_vispdf"> Visualizzazione PDF </a>-->
-<a href="curriculum.pdf" download="curriculum_simone_sorrentino.pdf"> Scarica PDF </a>
-<a href="#"> Articoli </a>
+<a href="./media/curriculum.pdf" download="curriculum_simone_sorrentino.pdf"> Scarica PDF </a>
+<label for="tab2"> Articoli </label>
 </nav>
 <section class="container">
+<div class="slide">
+<input type="radio" name="tab" id="tab1" checked style="display:none">
+<input type="radio" name="tab" id="tab2" style="display:none">
+<div class="slider">
+
+
+
+<section class="portfolio" id="slide1">
 <div class="info">
 <div class="title">Qualcosa su di me</div>
 <div class="desc">
@@ -505,7 +593,7 @@ Il mio obiettivo, dopo il diploma, è <strong>rivalutare la mia vita professiona
 </ol>
 </div>
 <div class="title" style="margin-top:18px">Script realizzati installati su ForumFree</div>
-<img src="script.png" style="width:80%" alt="Script Installati">
+<img src="./media/script.png" style="width:80%" alt="Script Installati">
 </div>
 <div class="list_item explav">
 <div class="title">Esperienze Lavorative</div>
@@ -538,25 +626,8 @@ Il mio obiettivo, dopo il diploma, è <strong>rivalutare la mia vita professiona
 </div>
 </div>
 </div>
-</section>
-<!--<script>
-document.querySelector('.pul_vispdf').addEventListener('click', () => {
-    // Carica lo script di Paged.js dinamicamente
-    const script = document.createElement('script');
-    script.src = 'https://unpkg.com/pagedjs/dist/paged.js'; // versione core NON auto-eseguibile
-    script.onload = () => {
-      // Quando caricato, avvia il polyfill
-      const paged = new Paged.Previewer();
 
-		paged.preview(document.body).then(() => {
-		  console.log('Paged.js attivato');
-		  // eventualmente avvia stampa
-		  window.print();
-		});
-    };
-    document.head.appendChild(script);
-  });
-</script>-->
+
 <script>
 const elementi = document.querySelectorAll('.cerchio-bordo');
 const durata = 3000;
@@ -580,10 +651,177 @@ elementi.forEach(el => {
   }, stepTime);
 });
 </script>
+</section>
+<!--<script>
+document.querySelector('.pul_vispdf').addEventListener('click', () => {
+    // Carica lo script di Paged.js dinamicamente
+    const script = document.createElement('script');
+    script.src = 'https://unpkg.com/pagedjs/dist/paged.js'; // versione core NON auto-eseguibile
+    script.onload = () => {
+      // Quando caricato, avvia il polyfill
+      const paged = new Paged.Previewer();
+
+		paged.preview(document.body).then(() => {
+		  console.log('Paged.js attivato');
+		  // eventualmente avvia stampa
+		  window.print();
+		});
+    };
+    document.head.appendChild(script);
+  });
+</script>-->
+
+
+
+<section class="article" id="slide2">
+<article>
+  <h2 class="title">Che impatto ha la tecnologia su di noi e sull'ambiente?</h2>
+
+  <p>Viviamo in un mondo in cui la tecnologia è diventata <strong>parte integrante della quotidianità</strong>: invio di email, streaming di video, uso dei social, ricerche su internet, sensori che aprono o chiudono automaticamente un ponte o un passaggio a livello. Sono tutte azioni che ormai compiamo con estrema naturalezza, senza riflettere su cosa esse comportino in termini di infrastrutture e consumi.</p>
+
+  <p>Dietro ogni <em>click</em> e ogni <em>automatismo</em> si nasconde un'<strong>infrastruttura complessa</strong>, basata sull'uso dei <strong>Big Data</strong> e su grandi quantità di energia. L'<strong>intelligenza artificiale</strong> ne incrementa ulteriormente il consumo. I computer e i server si scaldano e devono essere raffreddati, utilizzando materiali come acqua o azoto, aumentando l'<strong>impatto ambientale</strong>.</p>
+
+  <p>I <strong>Big Data</strong> rappresentano <em>enormi quantità di dati</em> generati continuamente da fonti diverse. Si distinguono in:</p>
+
+  <ul>
+    <li><strong>Dati strutturati</strong>: tabelle, database, fogli di calcolo.</li>
+    <li><strong>Dati non strutturati</strong>: immagini, video, post social, audio.</li>
+    <li><strong>Dati geospaziali</strong>: provenienti da GPS e satelliti.</li>
+    <li><strong>Dati in tempo reale</strong>: sensori meteo, traffico urbano.</li>
+  </ul>
+
+  <p>Vengono utilizzati in numerosi ambiti: <em>social media, email, sensori, telecamere, carte di credito, dispositivi intelligenti, satelliti</em>, previsioni meteorologiche, monitoraggio dell'inquinamento, ottimizzazione dei trasporti, automazione dei macchinari e sistemi di sicurezza.</p>
+
+  <p>Se utilizzati in modo <strong>responsabile</strong>, i Big Data possono essere uno <em>strumento per un futuro più sostenibile</em>. Usati <strong>impropriamente</strong>, invece, rischiano di causare un <strong>maggiore inquinamento</strong>.</p>
+
+  <h3 class="title">Impatto ambientale dei Big Data</h3>
+
+  <div>
+    <figure class="aligncenter">
+      <img decoding="async" src="./media/albero.png" alt="" style="max-width:730px;height:auto">
+    </figure>
+  </div>
+
+  <p>Ogni attività su Internet <strong>consuma energia</strong> e produce <strong>CO₂</strong>. Ad esempio:</p>
+
+  <ul>
+    <li>Una mail con allegato genera circa <strong>50g di CO₂</strong> (65 mail = 1 km in auto a benzina)</li>
+    <li>Una ricerca su Google consuma tra <strong>0,3 e 0,5g</strong></li>
+    <li>Un'ora di streaming video può arrivare fino a <strong>200g di CO₂</strong></li>
+    <li>I social producano al minuto la seguente quantità di CO2: <strong>TikTok: 2,63g; Instagram: 1,05g; Facebook: 0,79g; YouTube: 0,45g</strong></li>
+  </ul>
+
+  <p>Questi numeri, <em>moltiplicati per miliardi di persone</em>, hanno un <strong>impatto ambientale significativo</strong>, perché ogni singola azione coinvolge un <strong>data center</strong>.</p>
+
+  <h3 class="title">I Data Center</h3>
+
+  <div>
+    <figure class="aligncenter">
+      <img decoding="async" src="./media/datacenter.png" alt="">
+    </figure>
+  </div>
+
+  <p>I <strong>data center</strong> sono grandi edifici che ospitano migliaia di server. Hanno un <strong>impatto ambientale notevole</strong>:</p>
+
+  <ul>
+    <li>Rappresentano l'<strong>1-2% del consumo energetico mondiale</strong></li>
+    <li>Richiedono <em>sistemi di raffreddamento</em>, spesso ad acqua</li>
+    <li>Se alimentati da <em>fonti non rinnovabili</em>, producono <strong>emissioni elevate</strong></li>
+    <li>Generano <strong>rifiuti elettronici</strong> difficili da riciclare</li>
+  </ul>
+
+  <h3 class="title">Come migliorare la sostenibilità digitale</h3>
+
+  <div class="img_container">
+    <img decoding="async" src="./media/energia1.png" alt=""><img decoding="async" src="./media/energia2.png">
+  </div>
+
+  <p>Alcune grandi aziende stanno investendo in <strong>tecnologie più sostenibili</strong>:</p>
+
+  <ul>
+    <li><strong>Google</strong> alimenta i suoi data center con <em>energia rinnovabile al 100%</em></li>
+    <li><strong>Microsoft</strong> punta alla <em>neutralità carbonica</em></li>
+    <li><strong>Amazon</strong> ha investito in <em>parchi eolici e solari</em></li>
+  </ul>
+
+  <p>Anche noi possiamo contribuire:</p>
+
+  <ul>
+    <li><strong>Cancellare</strong> vecchie email inutili</li>
+    <li><strong>Limitare</strong> email superflue (es. "Grazie", "OK")</li>
+    <li><strong>Disattivare</strong> backup automatici non necessari</li>
+    <li><strong>Ridurre</strong> la qualità dello streaming se non necessaria</li>
+  </ul>
+
+  <p>È fondamentale <strong>educare le nuove generazioni</strong> alla <em>sostenibilità digitale e ambientale</em>, affinché crescano consapevoli dell'impatto delle tecnologie e dei dati sull'ambiente.</p>
+
+  <h3 class="title">Conclusione</h3>
+
+  <p>Il <strong>digitale</strong> ha trasformato le nostre vite, ma non senza conseguenze. I <strong>Big Data</strong> ci aiutano a comprendere e migliorare il mondo, ma generano anche un <strong>impatto ambientale</strong> che va gestito. È importante <em>investire in tecnologie sostenibili</em> e formare i cittadini affinché possano compiere <strong>scelte responsabili</strong>, conciliando <em>innovazione e rispetto per l'ambiente</em>.</p>
+</article>
+</section>
+</div>
+</div>
+
+</section>
+<script>
+const slideContainer = document.querySelector(".slide");
+const slider = document.querySelector(".slider");
+const sections = slider.querySelectorAll("section");
+const tabs = document.querySelectorAll('input[name="tab"]');
+
+function getTrueHeight(section) {
+  const originalStyle = section.style.cssText;
+
+
+  section.style.position = 'absolute';
+  section.style.visibility = 'hidden';
+  section.style.display = 'block';
+  section.style.transform = 'none';
+
+  const height = section.offsetHeight;
+
+
+  section.style.cssText = originalStyle;
+
+  return height;
+}
+
+
+function updateHeight(index) {
+  const height = getTrueHeight(sections[index]);
+  slideContainer.style.height = height + 'px';
+}
+
+
+updateHeight(0);
+
+
+tabs.forEach((tab, index) => {
+  tab.addEventListener('change', () => {
+    if (tab.checked) {
+	  let label  = document.querySelector('label[for="'+tab.id+'"]');
+	  if(label){
+		let text = label.innerText;
+		if(text){
+			text = text.toLowerCase();
+			location.hash=text;
+		}
+	  }
+	  
+      setTimeout(() => updateHeight(index), 10); 
+    }
+  });
+});
+
+
+</script>
 </main>
-<div class="spacer"></div>
+
 <footer><span class="right">Contattami: <a href="mailto:simone96sorrentino@gmail.com">simone96sorrentino@gmail.com</a></span>
 <span>&copy; Copyright Simone Sorrentino 2025</span>
 </footer>
 
 </body>
+
+</html>
