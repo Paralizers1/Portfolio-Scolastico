@@ -242,7 +242,7 @@ a {
      overflow:hidden;
      height: auto;
      height: 250px;
-     text-align:left;
+     text-align: Justify;
      transition: box-shadow 0.3s ease-in-out;
     position:relative;
 }
@@ -308,11 +308,10 @@ a {
 }
 /*ESPERIENZE DI LAVORO E TITOLI DI STUDIO*/
 .list_item:not(.explav)  ol.timeline{padding-bottom:16px;}
- ol.timeline { 
-	
+ ol.timeline {
      list-style: none;
      position: relative;
-     padding-left: 40px;
+     padding: 0 20px;
      margin: 0;
      counter-reset: step;
      font-family: "Playpen Sans", cursive;
@@ -450,7 +449,8 @@ footer .right a{color:#FFF;font-weight:500;}
   }
 
 .article {text-align:center;max-width:730px;margin:0 auto;}
-.article article> *:not(.title) {text-align:left;font-family:'Open Sans', sans-serif;font-weight:500;line-height: 1.8;letter-spacing: 1pt;
+.article article> *{text-align:justify;}
+.article article> *:not(.title) {font-family:'Open Sans', sans-serif;font-weight:500;line-height: 1.8;letter-spacing: 1pt;
      word-spacing: 1pt;}
 .article .title{margin: 10px;}
 .article .title:first-child{margin-top:30px;}
