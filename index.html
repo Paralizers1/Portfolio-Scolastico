@@ -229,9 +229,9 @@ a {
      background: linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.9));
      border-radius: 12px;
      padding: 1rem;
-     font-family: "Playpen Sans", cursive;
+     font-family: 'Open Sans', sans-serif
      font-optical-sizing: auto;
-     font-weight: 400;
+     font-weight: 500;
      font-style: normal;
      font-size: 11pt;
      line-height: 1.8;
@@ -802,50 +802,62 @@ const sections = slider.querySelectorAll("section");
 const tabs = document.querySelectorAll('input[name="tab"]');
 
 function getTrueHeight(section) {
-  const originalStyle = section.style.cssText;
-
-
-  section.style.position = 'absolute';
-  section.style.visibility = 'hidden';
-  section.style.display = 'block';
-  section.style.transform = 'none';
-
-  const height = section.offsetHeight;
-
-
-  section.style.cssText = originalStyle;
-
+  // Clona l'elemento per misurare senza influenzare l'originale
+  const clone = section.cloneNode(true);
+  
+  // Applica stili per la misurazione
+  clone.style.position = 'absolute';
+  clone.style.visibility = 'hidden';
+  clone.style.display = 'block';
+  clone.style.transform = 'none';
+  clone.style.opacity = '1';
+  clone.style.height = 'auto';
+  
+  // Aggiungi il clone al DOM
+  document.body.appendChild(clone);
+  
+  // Misura l'altezza
+  const height = clone.offsetHeight;
+  
+  // Rimuovi il clone
+  document.body.removeChild(clone);
+  
   return height;
 }
 
-
 function updateHeight(index) {
+  // Forza un reflow prima della misurazione
+  void sections[index].offsetHeight;
+  
   const height = getTrueHeight(sections[index]);
   slideContainer.style.height = height + 'px';
 }
 
-
-updateHeight(0);
-
+// Inizializza l'altezza dopo che tutto è caricato
+window.addEventListener('load', () => {
+  updateHeight(0);
+});
 
 tabs.forEach((tab, index) => {
   tab.addEventListener('change', () => {
     if (tab.checked) {
-	  let label  = document.querySelector('label[for="'+tab.id+'"]');
-	  if(label){
-		let text = label.innerText;
-		if(text){
-			text = text.toLowerCase();
-			location.hash=text;
-		}
-	  }
-	  
-      setTimeout(() => updateHeight(index), 10); 
+      let label = document.querySelector('label[for="'+tab.id+'"]');
+      if(label) {
+        let text = label.innerText;
+        if(text) {
+          text = text.toLowerCase();
+          location.hash = text;
+        }
+      }
+      
+      // Aumenta il timeout e forza un reflow
+      setTimeout(() => {
+        void sections[index].offsetHeight; // Forza reflow
+        updateHeight(index);
+      }, 50); // Aumentato il timeout per sicurezza
     }
   });
 });
-
-
 </script>
 </main>
 
