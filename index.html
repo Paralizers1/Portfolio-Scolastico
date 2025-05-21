@@ -802,11 +802,11 @@ const slider = document.querySelector(".slider");
 const sections = slider.querySelectorAll("section");
 const tabs = document.querySelectorAll('input[name="tab"]');
 
+let currentIndex = 0; // Memorizza l'indice corrente
+
 function getTrueHeight(section) {
-  // Clona l'elemento per misurare senza influenzare l'originale
   const clone = section.cloneNode(true);
   
-  // Applica stili per la misurazione
   clone.style.position = 'absolute';
   clone.style.visibility = 'hidden';
   clone.style.display = 'block';
@@ -814,51 +814,44 @@ function getTrueHeight(section) {
   clone.style.opacity = '1';
   clone.style.height = 'auto';
   
-  // Aggiungi il clone al DOM
   document.body.appendChild(clone);
-  
-  // Misura l'altezza
   const height = clone.offsetHeight;
-  
-  // Rimuovi il clone
   document.body.removeChild(clone);
   
   return height;
 }
 
 function updateHeight(index) {
-  // Forza un reflow prima della misurazione
-  void sections[index].offsetHeight;
-  
+  currentIndex = index; // Aggiorna l'indice corrente
   const height = getTrueHeight(sections[index]);
-  slideContainer.style.height = height + 'px';
+  slideContainer.style.height = `${height}px`;
 }
 
-// Inizializza l'altezza dopo che tutto è caricato
-window.addEventListener('load', () => {
-  updateHeight(0);
-});
+// Inizializza l'altezza al caricamento e quando cambia tab
+window.addEventListener('load', () => updateHeight(0));
 
 tabs.forEach((tab, index) => {
   tab.addEventListener('change', () => {
     if (tab.checked) {
-      let label = document.querySelector('label[for="'+tab.id+'"]');
-      if(label) {
-        let text = label.innerText;
-        if(text) {
-          text = text.toLowerCase();
-          location.hash = text;
-        }
+      const label = document.querySelector(`label[for="${tab.id}"]`);
+      if (label?.innerText) {
+        location.hash = label.innerText.toLowerCase();
       }
-      
-      // Aumenta il timeout e forza un reflow
-      setTimeout(() => {
-        void sections[index].offsetHeight; // Forza reflow
-        updateHeight(index);
-      }, 50); // Aumentato il timeout per sicurezza
+      setTimeout(() => updateHeight(index), 50);
     }
   });
 });
+
+// Osserva il ridimensionamento della finestra e ricalcola l'altezza
+const resizeObserver = new ResizeObserver(() => {
+  updateHeight(currentIndex); // Ricalcola in base all'indice corrente
+});
+
+// Osserva il contenitore principale per cambi di dimensioni
+resizeObserver.observe(slideContainer);
+
+// (Opzionale) Osserva anche il corpo della pagina per sicurezza
+resizeObserver.observe(document.body);
 </script>
 </main>
 
